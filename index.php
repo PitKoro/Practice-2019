@@ -32,7 +32,8 @@
 
       } else {
         //Иначе вставляем данные, подставляя их в запрос
-        $sql = mysqli_query($link, "INSERT INTO `Privileges` (`name`, `description`, `ifActive`) VALUES ('{$_POST['name']}', '{$_POST['description']}', '{$_POST['ifActive']}')");
+        $ifActive = $_POST['ifActive'] == 'true' ? 1 : 0;
+        $sql = mysqli_query($link, "INSERT INTO `Privileges` (`name`, `description`, `ifActive`) VALUES ('{$_POST['name']}', '{$_POST['description']}', {$ifActive})");
       }
 
       //Если вставка прошла успешно
@@ -100,8 +101,8 @@
         <td>Активность:</td>
         <td>
           <select name = "ifActive">
-            <option><? if(isset($_GET['red'])) {echo $product['ifActive'] == 1 ? 'true' : 'false';} ?> </option>
-            <option><? if(isset($_GET['red'])) {echo $product['ifActive'] == 1 ? 'false' : 'true';} ?> </option>
+            <option><? if(isset($_GET['red'])) {echo $product['ifActive'] == 1 ? 'true' : 'false';} else {echo 'true';} ?> </option>
+            <option><? if(isset($_GET['red'])) {echo $product['ifActive'] == 1 ? 'false' : 'true';} else {echo 'false';} ?> </option>
           </select>
         </td>
       </tr>
