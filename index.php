@@ -27,7 +27,9 @@
     if (isset($_POST["name"])) {
       //Если это запрос на обновление, то обновляем
       if (isset($_GET['red'])) {
-        $sql = mysqli_query($link, "UPDATE `Privileges` SET `name` = '{$_POST['name']}',`description` = '{$_POST['description']}', `ifActive` = '{$_POST['ifActive']}' WHERE `id`={$_GET['red']}");
+        $ifActive = $_POST['ifActive'] == 'true' ? 1 : 0;
+        $sql = mysqli_query($link, "UPDATE `Privileges` SET `name` = '{$_POST['name']}',`description` = '{$_POST['description']}', `ifActive` = {$ifActive} WHERE `id`={$_GET['red']}");
+
       } else {
         //Иначе вставляем данные, подставляя их в запрос
         $sql = mysqli_query($link, "INSERT INTO `Privileges` (`name`, `description`, `ifActive`) VALUES ('{$_POST['name']}', '{$_POST['description']}', '{$_POST['ifActive']}')");
@@ -96,7 +98,12 @@
       </tr>
       <tr>
         <td>Активность:</td>
-        <td><input type="text" name="ifActive" value="<?= isset($_GET['red']) ? $product['ifActive'] : ''; ?>"></td>
+        <td>
+          <select name = "ifActive">
+            <option><? if(isset($_GET['red'])) {echo $product['ifActive'] == 1 ? 'true' : 'false';} ?> </option>
+            <option><? if(isset($_GET['red'])) {echo $product['ifActive'] == 1 ? 'false' : 'true';} ?> </option>
+          </select>
+        </td>
       </tr>
       <tr>
         <td colspan="2"><input type="submit" value="OK"></td>
@@ -104,5 +111,8 @@
     </table>
   </form>
   <p><a href="?add=new">Добавить новую запись</a></p>
+
+  <?echo $_GET['red']."<br>";
+  echo $product['ifActive'];?>
 </body>
 </html>
