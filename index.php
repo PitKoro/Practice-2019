@@ -111,8 +111,5 @@
     </table>
   </form>
   <p><a href="?add=new">Добавить новую запись</a></p>
-
-  <?echo $_GET['red']."<br>";
-  echo $product['ifActive'];?>
 </body>
 </html>
