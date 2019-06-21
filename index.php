@@ -6,9 +6,9 @@
 	<body>
   <?php
     $host = 'localhost';  // Хост
-    $user = 'crm';    // Имя пользователя
-    $pass = '6QjgPjxQ'; // Установленный вами пароль пользователю
-    $db_name = 'crm';   // Имя базы данных
+    $user = 'crm_izo';    // Имя пользователя
+    $pass = 'B0XCTeUx'; // Установленный вами пароль пользователю
+    $db_name = 'crm_izo';   // Имя базы данных
     $link = mysqli_connect($host, $user, $pass, $db_name); // Соединяемся с базой
 
     echo "<meta charset=\"utf8\">";
